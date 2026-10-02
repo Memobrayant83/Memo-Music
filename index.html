@@ -248,7 +248,78 @@ stationName.textContent =
 
 }
 
-</script>
+async function playPodcast(query) {
+
+const stationName =
+document.getElementById("station-name");
+
+const audio =
+document.getElementById("audio");
+
+stationName.textContent =
+"Finding podcast...";
+
+try {
+
+const searchUrl =
+"https://itunes.apple.com/search?term=" +
+encodeURIComponent(query) +
+"&media=podcast&entity=podcast&limit=5";
+
+const response =
+await fetch(searchUrl);
+
+const data =
+await response.json();
+
+if (!data.results.length) {
+stationName.textContent =
+"No podcast found.";
+return;
+}
+
+const podcast =
+data.results[0];
+
+const rssUrl =
+"https://api.rss2json.com/v1/api.json?rss_url=" +
+encodeURIComponent(podcast.feedUrl);
+
+const rssResponse =
+await fetch(rssUrl);
+
+const feed =
+await rssResponse.json();
+
+const episode =
+feed.items.find(item =>
+item.enclosure &&
+item.enclosure.link
+);
+
+if (!episode) {
+stationName.textContent =
+"No episode found.";
+return;
+}
+
+stationName.textContent =
+"🎙️ " + podcast.collectionName +
+" — " + episode.title;
+
+audio.src =
+episode.enclosure.link;
+
+audio.play();
+
+} catch (error) {
+
+stationName.textContent =
+"Podcast failed to load.";
+
+}
+
+}</script>
 
 </body>
 </html>
