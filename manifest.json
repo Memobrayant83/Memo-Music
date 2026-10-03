@@ -1,7 +1,7 @@
 {
   "name": "Memo Music",
   "short_name": "Memo Music",
-  "start_url": "/Memo-Music/",
+  "id": "/Memo-Music/?v=2","start_url": "/Memo-Music/",
   "scope": "/Memo-Music/",
   "display": "standalone",
   "background_color": "#0b1020",
