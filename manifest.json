@@ -5,7 +5,7 @@
   "scope": "/Memo-Music/",
   "display": "standalone",
   "background_color": "#0b1020",
-  <link rel="manifest" href="manifest.json?v=2">
+  
   "description": "Memo Music — music, radio and podcasts.",
   "icons": [
     {
